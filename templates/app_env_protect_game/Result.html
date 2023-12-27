@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+</head>
+<body>
+<h3>Google News 取得</h3><a href="{% url 'app_env_protect_game:newsAPItest' %}">検索ページに戻る</a><br>
+{% for article in data.items %} 
+<a href="{{ article.link }}" target="_blank">{{ article.title }}</a><br>
+{% endfor %}
+</body>
+</html>
