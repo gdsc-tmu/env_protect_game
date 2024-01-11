@@ -2,7 +2,7 @@ class HP_gauge {
   constructor(_x,_y,_xsiz,_ysiz){
     this.maxhp = 100;
     this.hp = this.maxhp;
-    this.delta_hp =  1;//変化量
+    this.delta_hp =  0.2;//変化量
     this.x = _x;this.y = _y;this.xsiz = _xsiz;this.ysiz = _ysiz;
   }
 
@@ -139,7 +139,7 @@ class Field extends Land{
     this.maxlevel = 3;
     //収穫(コインを増やす用)
     this.harvestpoint = 0;
-    this.harvestable = 100;
+    this.harvestable = 500;
   }
 
   stateupdate(){
@@ -155,12 +155,14 @@ class Field extends Land{
 
 
 }
+
 let canvas;
 let minx,maxx,miny,maxy;//森林農地部分の指定
 let xnum,ynum;//森林農地を何分割するか
 let landxsiz = 0,landysiz = 0;
 let lands = [];//土地情報
 let hp,oxgen,coins;
+let isfinish = false;
 
 function setup(){
   canvas = createCanvas(800, 400);
@@ -197,6 +199,7 @@ function hpupdate(){
 }
 
 function oxgenupdate(){
+  //森の状態を利用して酸素ゲージを増減させる
   let treelevel_sum = 0;
   for(let i = 0;i < ynum;i++)for(let j = 0;j < xnum;j++){
     if(lands[i][j].state == landstate.tree){
@@ -208,7 +211,7 @@ function oxgenupdate(){
 }
 
 function coinsupdate(){
-  //収穫
+  //収穫してコインを増やす
   for(let i = 0;i < ynum;i++)for(let j = 0;j < xnum;j++){
     if(lands[i][j].state == landstate.field){
       if(lands[i][j].harvestpoint >= lands[i][j].harvestable){
@@ -248,29 +251,54 @@ function drawlands_and_update_status(){
 }
 
 function mouseaction(){
-  console.log(mouseX,mouseY);
-  //押されたのが森林か農地だったら
-  let fin = false;
-  for(let i = 0;i < ynum;i++)for(let j = 0;j < xnum;j++){
-    let pos = lands[i][j].position();
-    if(pos.minx <= mouseX && mouseX < pos.maxx
-      && pos.miny <= mouseY && mouseY < pos.maxy){
-        fin = true;
-        if(lands[i][j].state == landstate.tree){
-          //火をつける
-          lands[i][j] = new Fire(pos.minx,pos.maxx,pos.miny,pos.maxy,1);
-        }else if(lands[i][j].state == landstate.field){
-          //植林
-          lands[i][j] = new Tree(pos.minx,pos.maxx,pos.miny,pos.maxy,1/lands[i][j].level);
+  //マウスのクリックによって耕地森林の状態を変化させたりリスタートできるようにする  
+  if(isfinish){
+    //リスタート
+    hp = new HP_gauge(10,height/3,40,height/2);
+    oxgen = new Oxgen_gauge(60,height/3,40,height/2);
+    coins = new Coins(130,height/2 + height/3,30);
+    for(let i = 0;i < ynum;i++){
+      lands[i] = [];
+      for(let j = 0;j < xnum;j++){
+        if((i + j) % 2 == 0){
+          lands[i][j] = new Tree(
+            minx+landxsiz*j,minx + landxsiz * (j+1),
+            miny + landysiz * i,miny + landysiz * (i+1),1);
+          lands[i][j].level += 1;
+        }else{
+          lands[i][j] = new Field(
+            minx+landxsiz*j,minx + landxsiz * (j+1),
+            miny + landysiz * i,miny + landysiz * (i+1),1);
         }
-    }
-  }
-  if(fin)return ;
-  //それ以外のとこおいたらコイン使ってHP回復
 
-  if(coins.coincnt >= 1){
-    coins.coincnt -= 1;
-    hp.hp += 20;
+      }
+    }
+    isfinish = false;
+  }else{
+    //押されたのが森林か農地だったら
+    console.log(mouseX,mouseY);
+    let fin = false;
+    for(let i = 0;i < ynum;i++)for(let j = 0;j < xnum;j++){
+      let pos = lands[i][j].position();
+      if(pos.minx <= mouseX && mouseX < pos.maxx
+        && pos.miny <= mouseY && mouseY < pos.maxy){
+          fin = true;
+          if(lands[i][j].state == landstate.tree){
+            //火をつける
+            lands[i][j] = new Fire(pos.minx,pos.maxx,pos.miny,pos.maxy,1);
+          }else if(lands[i][j].state == landstate.field){
+            //植林
+            lands[i][j] = new Tree(pos.minx,pos.maxx,pos.miny,pos.maxy,1/lands[i][j].level);
+          }
+      }
+    }
+    if(fin)return ;
+    //それ以外のとこおいたらコイン使ってHP回復
+  
+    if(coins.coincnt >= 1){
+      coins.coincnt -= 1;
+      hp.hp += 20;
+    }
   }
 
 }
@@ -278,23 +306,47 @@ function mouseaction(){
 function mousePressed(){
   mouseaction();
 }
+
+function judge_isfinished(){
+  //ゲームオーバーかどうかを判定する
+  if(hp.hp <= 0 || oxgen.oxgen <= 0){
+    isfinish = true;
+  }
+}
+
 function draw(){
   background(100);
-  drawlands_and_update_status();
+  judge_isfinished();
+  if(isfinish){
+    //ゲームオーバーなのでゲームオーバー画面を出力する
+    fill(255,0,0);
+    textAlign(CENTER);
+    textSize(50);
+    text("GameOver", width/2, height/2);
+    //リスタートボタン作る
+    fill(0,200,0);
+    rect(width/2-100,height/2+ 50,200,50);
+
+    fill(255)
+    textSize(30);
+    text("Restart", width/2, height/2 + 85);
+
+
+  }else{
+    drawlands_and_update_status();
+    
+    //HPゲージの描画
+    hp.draw();
+    hpupdate();
   
-  //HPゲージの描画
-  hp.draw();
-  hpupdate();
+    //酸素ゲージの描画
+    oxgen.draw();
+    oxgenupdate();
+  
+    //コインの描画
+    coins.draw();
+    coinsupdate();
 
-  //酸素ゲージの描画
-  oxgen.draw();
-  oxgenupdate();
-
-  //コインの描画
-  coins.draw();
-  coinsupdate();
-
-
-  //マス目の描画と管理
+  }
 
 }
