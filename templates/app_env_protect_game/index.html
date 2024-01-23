@@ -7,10 +7,18 @@
     {% load static %}
     <script language="javascript" type="text/javascript" src="{% static 'app_env_protect_game/libraries/p5.min.js' %}"></script>
     <script language="javascript" type="text/javascript" src="{% static 'app_env_protect_game/game.js' %}"></script>
-
 </head>
 <body>
     <p>テンプレートページ</p>
-    <iframe src="{% url 'app_env_protect_game:newsAPItest' %}" frameborder="10"></iframe>
+        <div style="display: none;" id="env_news">
+            {% for article in data_news_environment.items %} 
+            <a href="{{ article.link }}" target="_blank">{{ article.title }}</a><br>
+            {% endfor %}
+        </div>
+        <div style="display: none;" id="poverty_news">
+            {% for article in data_news_poverty.items %} 
+            <a href="{{ article.link }}" target="_blank">{{ article.title }}</a><br>
+            {% endfor %}
+        </div>
 </body>
 </html>
