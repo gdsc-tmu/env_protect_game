@@ -311,6 +311,13 @@ function judge_isfinished(){
   //ゲームオーバーかどうかを判定する
   if(hp.hp <= 0 || oxgen.oxgen <= 0){
     isfinish = true;
+    if(hp.hp <= 0){
+      news_type = "poverty";
+    }else if(oxgen.oxgen <= 0){
+      news_type = "environment";
+    }else{
+      console.log("error");
+    }
   }
 }
 
@@ -331,7 +338,8 @@ function draw(){
     textSize(30);
     text("Restart", width/2, height/2 + 85);
 
-
+    // HttpRequest();
+    showNews(news_type);
   }else{
     drawlands_and_update_status();
     
@@ -347,6 +355,60 @@ function draw(){
     coins.draw();
     coinsupdate();
 
-  }
+    hideNews();
 
+  }
 }
+
+function showNews(news_type){
+  if(news_type == "environment"){
+    element = document.getElementById("env_news")
+    element.style.display = "block";
+  }else if(news_type == "poverty"){
+    element = document.getElementById("poverty_news")
+    element.style.display = "block";
+  }else{
+    console.log("error");
+  }
+}
+
+function hideNews(){
+  element = document.getElementById("env_news")
+  element.style.display = "none";
+  element = document.getElementById("poverty_news")
+  element.style.display = "none";
+} 
+
+/*ここはHHTPリクエストを送るための関数だけど、上手くいってない
+// csrf_tokenを取得する views.pyにhttpリクエストを送るため
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim();
+          // Does this cookie string begin with the name we want?
+          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+          }
+      }
+  }
+  return cookieValue;
+}
+
+const csrfToken = getCookie('csrftoken');
+
+function HttpRequest(){
+  let method = "POST";
+  let url = "gameResult/";
+  let body = JSON.stringify({result: "Gameover"});
+  let headers = {"Content-Type": "application/json", 'X-CSRFToken': csrfToken};
+
+  fetch(url, {method, headers, body})
+
+  .then(Response => Response.text())
+
+  .catch(error => console.error('Error:', error))
+}
+*/
