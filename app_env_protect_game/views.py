@@ -1,8 +1,11 @@
 from django.shortcuts import render
 import requests
 import xmltodict
-from .forms import newsWords
+# from .forms import newsWords
+from django.http import HttpResponse
+import json
 
+# Reference: https://qiita.com/KMD/items/872d8f4eed5d6ebf5df1
 def retriveNews(news_words):
     language = 'hl=ja&gl=JP&ceid=JP:ja'
     # Fetch news data
@@ -21,9 +24,28 @@ def retriveNews(news_words):
     return news_data
 
 def index(request):
-    news_environment = retriveNews("環境問題")
-    news_poverty = retriveNews("貧困")
-    return render(request, "app_env_protect_game/index.html", {"data_news_environment": news_environment, "data_news_poverty": news_poverty})
+    return render(request, "app_env_protect_game/index.html")
+
+def resultRedirect(request):
+    return render(request, 'app_env_protect_game/Result.html')
+
+def getNewsFeed(request):
+    if request.method == "POST":
+        request_body = json.loads(request.body)
+        body = request_body.get("result")
+        print("Received POST request with body:", body)
+
+        if body == "poverty":
+            news_poverty = retriveNews("貧困")
+            return render(request, "app_env_protect_game/News.html", {"news_poverty": news_poverty})
+        elif body == "environment":
+            news_environment = retriveNews("環境問題")
+            return render(request, "app_env_protect_game/News.html", {"news_environment": news_environment})
+        else:
+            return HttpResponse("Invalid request body")
+    else:
+        return HttpResponse("No POST request made")
+
 
 '''HTMLのフォームから入力された文字列を受け取り、それを元にGoogleニュースから情報を取得する
 def newsAPItest(request):
@@ -53,21 +75,4 @@ def newsAPItest(request):
         form = newsWords()
 
     return render(request, "app_env_protect_game/Search.html", {"form": form})
-'''
-
-from django.http import HttpResponse
-import json
-
-'''game.jsからPOSTリクエストを受け取ってResultを返すはずだが、上手くいっていない
-def gameResult(request):
-    if request.method == "POST":
-        request_body = json.loads(request.body)
-        body = request_body.get("result")
-        if body == "Gameover":
-            return render(request, "app_env_protect_game/Result.html")
-        else:
-            return HttpResponse("Invalid request body")
-    else:
-        return HttpResponse("No post made")
-
 '''
