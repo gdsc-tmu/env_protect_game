@@ -3,23 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        // This code should be in the JavaScript file loaded on the /result page
+        document.addEventListener('DOMContentLoaded', function() {
+        // Retrieve data from local storage
+        const newsContents = localStorage.getItem("news");
+        console.log(newsContents);
+        // Set the content to the element on the result page
+        document.getElementById("news-feed").innerHTML = newsContents;
+        });
+    </script>
     <title>Result</title>
 </head>
 <body>
-<!---<h3>Google News 取得</h3><a href="{% url 'app_env_protect_game:newsAPItest' %}">検索ページに戻る</a><br>--->
-
-<div style="display: none;" id="env_news">
-    {% for article in data_news_environment.items %} 
-    <a href="{{ article.link }}" target="_blank">{{ article.title }}</a><br>
-    {% endfor %}
-</div>
-
-<div style="display: none;" id="poverty_news">
-    {% for article in data_news_poverty.items %} 
-    <a href="{{ article.link }}" target="_blank">{{ article.title }}</a><br>
-    {% endfor %}
-</div>
-
-
+    <a style="font-size: 24px" href="{% url 'app_env_protect_game:index' %}">ゲーム画面に戻る</a>
+    <div id="news-feed"></div>
 </body>
 </html>
