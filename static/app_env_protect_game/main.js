@@ -165,6 +165,7 @@ let hp,oxgen,coins;
 let isfinish = false;
 
 function setup(){
+  img = loadImage("/img/gamecoin.png")
   canvas = createCanvas(800, 400);
   canvas.parent('myContainer');
   background(100);
