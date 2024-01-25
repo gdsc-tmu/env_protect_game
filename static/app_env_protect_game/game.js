@@ -345,9 +345,9 @@ function draw(){
     fill(255)
     textSize(30);
     text("Restart", width/2, height/2 + 85);
-
-    // HttpRequest();
-    showNews(news_type);
+    
+    redirectToresult(news_type);
+    noLoop();
   }else{
     drawlands_and_update_status();
     
@@ -363,32 +363,9 @@ function draw(){
     coins.draw();
     coinsupdate();
 
-    hideNews();
-
   }
 }
 
-function showNews(news_type){
-  if(news_type == "environment"){
-    element = document.getElementById("env_news")
-    element.style.display = "block";
-  }else if(news_type == "poverty"){
-    element = document.getElementById("poverty_news")
-    element.style.display = "block";
-  }else{
-    console.log("error");
-  }
-}
-
-function hideNews(){
-  element = document.getElementById("env_news")
-  element.style.display = "none";
-  element = document.getElementById("poverty_news")
-  element.style.display = "none";
-} 
-
-/*ここはHHTPリクエストを送るための関数だけど、上手くいってない
-// csrf_tokenを取得する views.pyにhttpリクエストを送るため
 function getCookie(name) {
   let cookieValue = null;
   if (document.cookie && document.cookie !== '') {
@@ -407,16 +384,22 @@ function getCookie(name) {
 
 const csrfToken = getCookie('csrftoken');
 
-function HttpRequest(){
+function redirectToresult(news_type) {
   let method = "POST";
-  let url = "gameResult/";
-  let body = JSON.stringify({result: "Gameover"});
-  let headers = {"Content-Type": "application/json", 'X-CSRFToken': csrfToken};
+  let url = "newsFeed/";
+  let body = JSON.stringify({ result: news_type });
+  let headers = {
+    "Content-Type": "application/json",
+    'X-CSRFToken': csrfToken
+  };
 
-  fetch(url, {method, headers, body})
-
-  .then(Response => Response.text())
-
-  .catch(error => console.error('Error:', error))
+  fetch(url, { method, headers, body })
+    .then(response => response.text())
+    .then(data => {
+      // Save data to local storage
+      localStorage.setItem("news", data);
+      // Navigate to the result page
+      location.assign("result/");
+    })
+    .catch(error => console.error('Error:', error));
 }
-*/
