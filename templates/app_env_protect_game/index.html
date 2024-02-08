@@ -7,10 +7,9 @@
     {% load static %}
     <script language="javascript" type="text/javascript" src="{% static 'app_env_protect_game/libraries/p5.min.js' %}"></script>
     <script language="javascript" type="text/javascript" src="{% static 'app_env_protect_game/game.js' %}"></script>
-
 </head>
 <body>
-    <p>テンプレートページ</p>
-    <iframe src="{% url 'app_env_protect_game:newsAPItest' %}" frameborder="10"></iframe>
+    <div style="display: block;" id='myContainer'></div>
+    <div style="display: block;" id='myContainer'></div>
 </body>
 </html>
