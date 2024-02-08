@@ -373,6 +373,28 @@ function draw(){
   }
 }
 
+function setCookie(){
+  let N = 62;
+  let value = "";
+  for (let i = 0; i < 32; i++) {
+    var randomval = Math.floor(Math.random() * N);
+    if (randomval < 26) {
+      // 小文字
+      value += String.fromCharCode('a'.charCodeAt(0) + randomval);
+    } else if (randomval < 52) {
+      // 大文字
+      value += String.fromCharCode('A'.charCodeAt(0) + (randomval - 26));
+    } else {
+      value += String.fromCharCode('0'.charCodeAt(0) + (randomval - 52));
+    }
+  }
+  
+  document.cookie = 'csrftoken=' + value;
+}
+
+setCookie();
+
+
 function getCookie(name) {
   let cookieValue = null;
   if (document.cookie && document.cookie !== '') {
@@ -389,9 +411,8 @@ function getCookie(name) {
   return cookieValue;
 }
 
-const csrfToken = getCookie('csrftoken');
-
 function redirectToresult(news_type) {
+  const csrfToken = getCookie('csrftoken');
   let method = "POST";
   let url = "newsFeed/";
   let body = JSON.stringify({ result: news_type });
