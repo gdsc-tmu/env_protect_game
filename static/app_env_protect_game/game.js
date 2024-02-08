@@ -326,6 +326,13 @@ function judge_isfinished(){
     }else{
       console.log("error");
     }
+    if(hp.hp <= 0){
+      news_type = "poverty";
+    }else if(oxgen.oxgen <= 0){
+      news_type = "environment";
+    }else{
+      console.log("error");
+    }
   }
 }
 

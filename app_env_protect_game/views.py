@@ -61,6 +61,28 @@ def getNewsFeed(request):
 
 
 '''HTMLのフォームから入力された文字列を受け取り、それを元にGoogleニュースから情報を取得する
+def resultRedirect(request):
+    return render(request, 'app_env_protect_game/Result.html')
+
+def getNewsFeed(request):
+    if request.method == "POST":
+        request_body = json.loads(request.body)
+        body = request_body.get("result")
+        print("Received POST request with body:", body)
+
+        if body == "poverty":
+            news_poverty = retriveNews("貧困")
+            return render(request, "app_env_protect_game/News.html", {"news_poverty": news_poverty})
+        elif body == "environment":
+            news_environment = retriveNews("環境問題")
+            return render(request, "app_env_protect_game/News.html", {"news_environment": news_environment})
+        else:
+            return HttpResponse("Invalid request body")
+    else:
+        return HttpResponse("No POST request made")
+
+
+'''HTMLのフォームから入力された文字列を受け取り、それを元にGoogleニュースから情報を取得する
 def newsAPItest(request):
     if request.method == "POST":
         form = newsWords(request.POST)
