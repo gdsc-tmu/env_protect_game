@@ -1,13 +1,19 @@
 {% load static %}
-<script language="javascript" type="text/javascript" src="{% static 'app_env_protect_game/main.js' %}"></script>
-    <h1>News</h1>
+<link rel="stylesheet" type="text/css" href="{% static 'app_env_protect_game/style.css' %}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&display=swap" rel="stylesheet">
     <div id="env_news">
-        {% for article in news_environment.items %} 
-        <a href="{{ article.link }}" target="_blank">{{ article.title }}</a><br>
+        {% for article in news_environment.items %}
+            <div id="{{ article.id }}" class="cloud" style="left: 0px; top: 0px;">
+                <a class="cloud-text" href="{{ article.link }}" target="_blank">{{ article.title }}</a>
+            </div>
         {% endfor %}
     </div>
     <div id="poverty_news">
         {% for article in news_poverty.items %} 
-        <a href="{{ article.link }}" target="_blank">{{ article.title }}</a><br>
+            <div id="{{ article.id }}" class="cloud" style="left: 0px; top: 0px;">
+                <a class="cloud-text" href="{{ article.link }}" target="_blank">{{ article.title }}</a>
+            </div>
         {% endfor %}
     </div>

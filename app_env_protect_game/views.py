@@ -8,15 +8,28 @@ import json
 # Reference: https://qiita.com/KMD/items/872d8f4eed5d6ebf5df1
 def retriveNews(news_words):
     language = 'hl=ja&gl=JP&ceid=JP:ja'
+    number_of_news = 20
+
     # Fetch news data
     news_response = requests.get(f'https://news.google.com/rss/search?q={news_words}&{language}')
     news_json = xmltodict.parse(news_response.text)
 
     news_items = []
+    import random
+    news_len = len(news_json['rss']['channel']['item'])
+    news_to_be_displayed = random.sample(range(news_len), number_of_news)
+    
+    id_counter = 1
+    for item in news_to_be_displayed:
+        news = news_json['rss']['channel']['item'][item]
+        
+        NewsId = f"point{id_counter}"
+        id_counter += 1
+        Id_to_be_added = {"id": NewsId}
 
-    # Extract the items in the news JSON
-    for item in news_json['rss']['channel']['item']:
-        news_items.append(item)
+        news.update(Id_to_be_added)
+
+        news_items.append(news)
 
     # Create a new JSON object with the extracted items
     news_data = {'items': news_items}
@@ -76,3 +89,17 @@ def newsAPItest(request):
 
     return render(request, "app_env_protect_game/Search.html", {"form": form})
 '''
+
+'''
+if __name__ == "__main__":
+    language = 'hl=ja&gl=JP&ceid=JP:ja'
+    # Fetch news data
+    news_response = requests.get(f'https://news.google.com/rss/search?q={"環境"}&{language}')
+    news_json = xmltodict.parse(news_response.text)
+
+
+
+
+'''
+
+

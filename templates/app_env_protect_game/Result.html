@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <script language="javascript" type="text/javascript" src="{% static 'app_env_protect_game/main.js' %}"></script>
     <script>
-        // This code should be in the JavaScript file loaded on the /result page
         document.addEventListener('DOMContentLoaded', function() {
-        // Retrieve data from local storage
-        const newsContents = localStorage.getItem("news");
-        console.log(newsContents);
-        // Set the content to the element on the result page
-        document.getElementById("news-feed").innerHTML = newsContents;
+            loadNews();
+            //rotation();
         });
+        
     </script>
     <title>Result</title>
 </head>
