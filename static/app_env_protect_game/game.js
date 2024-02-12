@@ -168,7 +168,7 @@ let landxsiz = 0,landysiz = 0;
 let lands = [];//土地情報
 let hp,oxgen,coins;
 let isfinish = false;
-
+let news_type = "none";
 
 
 function setup(){
@@ -411,11 +411,12 @@ function getCookie(name) {
   return cookieValue;
 }
 
+gametime = 360;
 function redirectToresult(news_type) {
   const csrfToken = getCookie('csrftoken');
   let method = "POST";
   let url = "newsFeed/";
-  let body = JSON.stringify({ result: news_type });
+  let body = JSON.stringify({ result: news_type, gametime: gametime});
   let headers = {
     "Content-Type": "application/json",
     'X-CSRFToken': csrfToken

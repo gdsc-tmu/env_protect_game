@@ -46,14 +46,14 @@ def getNewsFeed(request):
     if request.method == "POST":
         request_body = json.loads(request.body)
         body = request_body.get("result")
-        print("Received POST request with body:", body)
+        gametime = request_body.get("gametime")
 
         if body == "poverty":
             news_poverty = retriveNews("貧困")
-            return render(request, "app_env_protect_game/News.html", {"news_poverty": news_poverty})
+            return render(request, "app_env_protect_game/News.html", {"news_poverty": news_poverty, "gametime": gametime})
         elif body == "environment":
             news_environment = retriveNews("環境問題")
-            return render(request, "app_env_protect_game/News.html", {"news_environment": news_environment})
+            return render(request, "app_env_protect_game/News.html", {"news_environment": news_environment, "gametime": gametime})
         else:
             return HttpResponse("Invalid request body")
     else:
