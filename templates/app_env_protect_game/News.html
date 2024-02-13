@@ -3,7 +3,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&display=swap" rel="stylesheet">
-<a>{{ gametime }}秒キープ成功！</a>
+<button onclick="screenShot()">スクショ</button>
+<button onclick="showScreenShot()">見せる</button>
+
+<div class="result-share" id="screenCapture">
+    <a class="result-share-text">{{ gametime }}秒キープ成功！</a>
+    <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-hashtags="env_protect_game" data-show-count="false" data-url="sample.dev" target="_blank">Tweet</a>
+</div>
+
     <div id="env_news">
         {% for article in news_environment.items %}
             <div id="{{ article.id }}" class="cloud" style="left: 0px; top: 0px;">
@@ -18,3 +25,5 @@
             </div>
         {% endfor %}
     </div>
+    <img src="" id="capturedScreen">
+    <script language="javascript" type="text/javascript" src="{% static 'app_env_protect_game/main.js' %}"></script>

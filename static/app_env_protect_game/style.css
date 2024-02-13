@@ -25,7 +25,7 @@ body {
 
     position: relative;
 
-    animation: GFG 10s infinite linear;
+    /* animation: GFG 10s infinite linear; */
     
     z-index: 0;
 }
@@ -66,6 +66,31 @@ body {
 	-moz-border-radius: 200px;
 }
 
+.result-share {
+	width: 600px;
+    height: 145px;
+    display: block;
+	position: relative;
+	background: #f2f9fe;
+	border-radius: 100px;
+	top: 50%;
+	left: 50%;
+	padding: 20px;
+
+}
+
+.result-share .result-share-text{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform : translate(-50%,-50%);
+	transform : translate(-50%,-50%);
+	text-align: center;
+	font-family: "Hachi Maru Pop", cursive;
+	font-size: 2rem;
+	
+
+}
 
 /* Moving clouds https://www.geeksforgeeks.org/how-to-move-an-element-in-a-circular-path-using-css/
 @keyframes GFG { 

@@ -8,7 +8,7 @@ import json
 # Reference: https://qiita.com/KMD/items/872d8f4eed5d6ebf5df1
 def retriveNews(news_words):
     language = 'hl=ja&gl=JP&ceid=JP:ja'
-    number_of_news = 20
+    number_of_news = 5
 
     # Fetch news data
     news_response = requests.get(f'https://news.google.com/rss/search?q={news_words}&{language}')
