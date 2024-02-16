@@ -607,12 +607,12 @@ function getCookie(name) {
   return cookieValue;
 }
 
-gametime = 360;
+
 function redirectToresult(news_type) {
   const csrfToken = getCookie('csrftoken');
   let method = "POST";
-  let url = "newsFeed/";
-  let body = JSON.stringify({ result: news_type, gametime: gametime});
+  let url = "newsPage/";
+  let body = JSON.stringify({ result: news_type});
   let headers = {
     "Content-Type": "application/json",
     'X-CSRFToken': csrfToken
@@ -624,7 +624,7 @@ function redirectToresult(news_type) {
       // Save data to local storage
       localStorage.setItem("news", data);
       // Navigate to the result page
-      location.assign("result/");
+      location.assign("newsPage/");
     })
     .catch(error => console.error('Error:', error));
 }

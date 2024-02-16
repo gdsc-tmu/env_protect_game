@@ -30,6 +30,16 @@ html {
 	position: relative;
 }
 
+.return-game {
+	position: absolute;
+	top: 0%;
+	left: 0%;
+	font-size: 2rem;
+	color: #FFFFFF;
+	text-decoration: none;
+
+}
+
 
 
 
