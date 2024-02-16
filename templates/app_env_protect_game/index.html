@@ -7,9 +7,12 @@
     {% load static %}
     <script language="javascript" type="text/javascript" src="{% static 'app_env_protect_game/libraries/p5.min.js' %}"></script>
     <script language="javascript" type="text/javascript" src="{% static 'app_env_protect_game/game.js' %}"></script>
+    <link rel="icon" type="image/ico" href="{% static 'app_env_protect_game/img/favicon.ico' %}">
 </head>
 <body>
     <div style="display: block;" id='myContainer'></div>
-    <div style="display: block;" id='myContainer'></div>
+    <div style="display: block;">
+        <a href="{% url 'app_env_protect_game:newsPage' %}">ニュースを見るぞ</a>
+    </div>
 </body>
 </html>

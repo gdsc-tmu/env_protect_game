@@ -1,107 +1,232 @@
-/* Cloud example https://codepen.io/fershocastro/pen/dVBgxQ */
+html {
+	font-size: 62.5%;
+	overflow: hidden;
+  }
 
-body {
-    background-color:#66D0FF;
-}
+  body {
+	background-color:#755A5A;
+	font-family: "Share Tech", sans-serif;
+  }
 
-.cloud { 
-	width: 350px;
-    height: fit-content;
-    text-align: center;
-    display: inline-flex;
-    justify-content: center;
-    margin: 100px auto;
-	
-	background: #f2f9fe;
-	background: linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
-	background: -webkit-linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
-	background: -moz-linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
-	background: -ms-linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
-	background: -o-linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
-	
-	border-radius: 100px;
-	-webkit-border-radius: 100px;
-	-moz-border-radius: 100px;
+.news-image {
+	width: 100%;
+	margin: auto;
+	display: block;
+  }
 
-    position: relative;
-
-    /* animation: GFG 10s infinite linear; */
-    
-    z-index: 0;
-}
-
-.cloud .cloud-text {
-	font-family: "Hachi Maru Pop", cursive;
-	font-weight: 400;
-	font-style: normal;
-	text-decoration: none;
-    margin: auto;
-    display: block;
-    padding: 30px;
-}
-
-.cloud:after, .cloud:before {
-	content: '';
+  .lines-image {
+	width: 10%;
 	position: absolute;
-	background: #f2f9fe;
-	z-index: -1;
-}
+	top: 35%;
+	left: 44%;
+	display: block;
+	z-index: 1;
+  }
 
-.cloud:after {
-	width: 100px;
-    height: 100px;
-	top: -50px;
-    left: 50px;
-	
-	border-radius: 100px;
-	-webkit-border-radius: 100px;
-	-moz-border-radius: 100px;
-}
 
-.cloud:before {
-	width: 180px; height: 180px;
-	top: -90px; right: 50px;
-	border-radius: 200px;
-	-webkit-border-radius: 200px;
-	-moz-border-radius: 200px;
-}
-
-.result-share {
-	width: 600px;
-    height: 145px;
-    display: block;
+  .container {
+	width: 100%;
+	height: 100%;
 	position: relative;
-	background: #f2f9fe;
-	border-radius: 100px;
-	top: 50%;
-	left: 50%;
-	padding: 20px;
-
 }
 
-.result-share .result-share-text{
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	-webkit-transform : translate(-50%,-50%);
-	transform : translate(-50%,-50%);
-	text-align: center;
-	font-family: "Hachi Maru Pop", cursive;
-	font-size: 2rem;
+
+
+
+
+/* Place each news without overlapping*/
+#poverty_news #news1{position: absolute; top: 25%; left: 25%;}
+#poverty_news #news2{position: absolute; top: 40%; left: 25%;}
+#poverty_news #news3{position: absolute; top: 55%; left: 25%;}
+
+
+#env_news #news1{position: absolute; top: 25%; left: 55%;}
+#env_news #news2{position: absolute; top: 40%; left: 55%;}
+#env_news #news3{position: absolute; top: 55%; left: 55%;}
+
+/* When id exists use these */
+/* #poverty_and_enviroment_news_1{position: absolute; top: 30%; left: 40%;}
+#poverty_and_enviroment_news_2{position: absolute; top: 45%; left: 40%;}
+#poverty_and_enviroment_news_3{position: absolute; top: 60%; left: 40%;}
+#poverty_and_enviroment_news_4{position: absolute; top: 75%; left: 40%;} */
+
+
+
+@media (min-width: 1001px) {
+
+	h1 {
+		font-weight: 400;
+		font-style: normal;
+		position: absolute;
+		top: 0%;
+		left: 40%;
+		font-size: 2.4rem;
+		color: #FFFFFF;
+	}
+
+	.news-contents{
+		width: 18%;
+		height: 12%;
+		text-align: center;
+		border-radius: 10px;
+		background: #ECCF87;
+		position: absolute;
 	
+		/* This is to be modified */
+		top: 30%;
+		left: 20%;
 
+		/* transition: transform .5s; */
+
+
+	}
+
+	/* .news-contents:hover{
+		transform: scale(1.5);
+	} */
+
+	.news-text{
+		width: 90%;
+		max-height: 80%;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		
+		font-size: 1.4rem;
+		text-decoration: none;
+	}
+
+	.question-mark {
+		color: #D88686;
+		font-size: 14rem;
+		position: absolute;
+		top: 38%;
+		left: 47%;
+		z-index: 2;
+	}
+
+
+	
 }
 
-/* Moving clouds https://www.geeksforgeeks.org/how-to-move-an-element-in-a-circular-path-using-css/
-@keyframes GFG { 
-    0% { 
-        transform: rotate(0deg)  
-              translateY(200px) rotate(0deg); 
-    } 
 
-    100% { 
-        transform: rotate(360deg)  
-              translateY(200px) rotate(-360deg); 
-    } 
-} 
-*/
+@media (min-width: 768px) and (max-width: 1000px) {
+
+	h1 {
+		font-weight: 400;
+		font-style: normal;
+		position: absolute;
+		top: 0%;
+		left: 40%;
+		font-size: 1.4rem;
+		color: #FFFFFF;
+	}
+
+	.news-contents{
+		width: 18%;
+		height: 12%;
+		text-align: center;
+		border-radius: 10px;
+		background: #ECCF87;
+		position: absolute;
+	
+		/* This is to be modified */
+		top: 30%;
+		left: 20%;
+	}
+
+	.news-text{
+		width: 90%;
+		max-height: 80%;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		
+		font-size: 1.2rem;
+		text-decoration: none;
+	}
+
+	.question-mark {
+		color: #D88686;
+		font-size: 8rem;
+		position: absolute;
+		top: 40%;
+		left: 48%;
+		z-index: 2;
+	}
+
+
+	
+}
+
+         
+
+@media (min-width: 320px) and (max-width: 767px) {
+
+	h1 {
+		font-weight: 400;
+		font-style: normal;
+		position: absolute;
+		top: 0%;
+		left: 40%;
+		font-size: 1.6rem;
+		color: #FFFFFF;
+	}
+
+	.news-contents{
+		width: 18%;
+		height: 12%;
+		text-align: center;
+		border-radius: 10px;
+		background: #ECCF87;
+		position: absolute;
+	
+		/* This is to be modified */
+		top: 30%;
+		left: 20%;
+	}
+
+	.news-text{
+		width: 90%;
+		max-height: 80%;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		
+		font-size: 0.8rem;
+		text-decoration: none;
+	}
+
+	.question-mark {
+		color: #D88686;
+		font-size: 6rem;
+		position: absolute;
+		top: 40%;
+		left: 48%;
+		z-index: 2;
+	}
+
+
+
+	
+}
+
+/* Text wrapping ref: https://qiita.com/KazuyoshiGoto/items/4f88e87bb12ff38d1c4e */
