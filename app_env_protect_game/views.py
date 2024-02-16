@@ -7,8 +7,8 @@ import json
 
 # Reference: https://qiita.com/KMD/items/872d8f4eed5d6ebf5df1
 def retriveNews(news_words):
-    language = 'hl=ja&gl=JP&ceid=JP:ja'
-    number_of_news = 20
+    language = 'hl=en&gl=EN&ceid=EN:en'
+    number_of_news = 3
 
     # Fetch news data
     news_response = requests.get(f'https://news.google.com/rss/search?q={news_words}&{language}')
@@ -23,7 +23,7 @@ def retriveNews(news_words):
     for item in news_to_be_displayed:
         news = news_json['rss']['channel']['item'][item]
         
-        NewsId = f"point{id_counter}"
+        NewsId = f"news{id_counter}"
         id_counter += 1
         Id_to_be_added = {"id": NewsId}
 
@@ -46,15 +46,22 @@ def getNewsFeed(request):
     if request.method == "POST":
         request_body = json.loads(request.body)
         body = request_body.get("result")
-        print("Received POST request with body:", body)
+        gametime = request_body.get("gametime")
 
         if body == "poverty":
-            news_poverty = retriveNews("貧困")
-            return render(request, "app_env_protect_game/News.html", {"news_poverty": news_poverty})
+            news_poverty = retriveNews("economic poverty")
+            return render(request, "app_env_protect_game/News.html", {"news_poverty": news_poverty, "gametime": gametime})
         elif body == "environment":
-            news_environment = retriveNews("環境問題")
-            return render(request, "app_env_protect_game/News.html", {"news_environment": news_environment})
+            news_environment = retriveNews("environment problems")
+            return render(request, "app_env_protect_game/News.html", {"news_environment": news_environment, "gametime": gametime})
         else:
             return HttpResponse("Invalid request body")
     else:
         return HttpResponse("No POST request made")
+    
+def newsPage(request):
+    poverty_news = retriveNews("economic poverty")
+    env_news = retriveNews("environment problems")
+    return render(request, "app_env_protect_game/News.html", {"poverty_news": poverty_news, "env_news": env_news})
+    # poverty_and_enviroment_news = retriveNews("economic poverty and environment problems")
+    # return render(request, "app_env_protect_game/News.html", {"poverty_and_enviroment_news": poverty_and_enviroment_news})

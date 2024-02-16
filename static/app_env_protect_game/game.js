@@ -215,6 +215,8 @@ let lands = [];//土地情報
 let hp,oxgen,coins;
 let started = false;
 let isfinish = false;
+
+let news_type = "none";
 let starttime,endtime;
 let coin_tutrial = true;//tutrialをやる必要があるか
 let planting_tutrial = true;
@@ -605,11 +607,12 @@ function getCookie(name) {
   return cookieValue;
 }
 
+
 function redirectToresult(news_type) {
   const csrfToken = getCookie('csrftoken');
   let method = "POST";
-  let url = "newsFeed/";
-  let body = JSON.stringify({ result: news_type });
+  let url = "newsPage/";
+  let body = JSON.stringify({ result: news_type});
   let headers = {
     "Content-Type": "application/json",
     'X-CSRFToken': csrfToken
@@ -621,7 +624,7 @@ function redirectToresult(news_type) {
       // Save data to local storage
       localStorage.setItem("news", data);
       // Navigate to the result page
-      location.assign("result/");
+      location.assign("newsPage/");
     })
     .catch(error => console.error('Error:', error));
 }

@@ -7,9 +7,9 @@ app_name = "app_env_protect_game"
 
 urlpatterns = [
         path('', views.index, name="index"),
-        path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('app_env_protect_game/img/favicon.ico'))),
         path('newsFeed/', views.getNewsFeed, name="getNewsFeed"),
         path('result/', views.resultRedirect, name="resultRedirect"),
+        path('newsPage/', views.newsPage, name="newsPage")
 
 ]
 
