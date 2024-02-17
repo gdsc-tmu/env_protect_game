@@ -22,10 +22,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-@ghfwmsm9!tkz)nw4=yhybwnp)t6vr@&x#e^%1l-0#x@o-f!^y'
 
+import os
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ['*']
+if os.getenv('GAE_APPLICATION', None):
+# 本番環境
+    DEBUG = False
+    ALLOWED_HOSTS = ['https://erudite-scholar-382607.an.r.appspot.com']
+else:
+    # 開発環境
+    DEBUG = True
+    ALLOWED_HOSTS = ['*']
 
 
 # Application definition

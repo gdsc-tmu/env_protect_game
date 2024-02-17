@@ -1,0 +1,11 @@
+runtime: python311
+
+handlers:
+- url: /static
+  static_dir: static/
+
+entrypoint: gunicorn -b :$PORT env_protect_game.wsgi:application
+
+runtime_config:
+    operating_system: "ubuntu22"
+
