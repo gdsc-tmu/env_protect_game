@@ -133,6 +133,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
+# import mimetypes
+# mimetypes.add_type("text/javascript", ".js", True)
+
+
 '''
 LOGGING = {
     'version': 1,
