@@ -1,15 +1,16 @@
 runtime: python311
 
-entrypoint: gunicorn -b :$PORT env_protect_game.wsgi:application
-
 handlers:
-- url: .*
-  secure: always
+- url: /.*
   script: auto
+  secure: always
 
 - url: /static
-  static_dir: static/
+  static_dir: static
 
-runtime_config:
-    operating_system: "ubuntu22"
+- url: /favicon\.ico
+  static_files: static/img/favicon.ico
+  upload: static/img/favicon\.ico
+  secure: always
 
+entrypoint: gunicorn -b :$PORT env_protect_game.wsgi:application
