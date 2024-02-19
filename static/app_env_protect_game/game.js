@@ -33,12 +33,12 @@ class HP_gauge {
 
   draw(){
     //外枠
-    fill(200);
+    fill(231,230,230);
     rect(this.x,this.y,this.xsiz,this.ysiz);
     //中身 
     let length = this.ysiz * this.hp/this.maxhp;
     if(this.hp >= 0){
-      fill(32,223,128);
+      fill(255,187,154);
       rect(this.x,this.y + this.ysiz - length,this.xsiz,length);
     }
   }
@@ -61,12 +61,12 @@ class Oxgen_gauge{
 
   draw(){
     //外枠
-    fill(200);
+    fill(231,230,230);
     rect(this.x,this.y,this.xsiz,this.ysiz);
     //中身 
     let length = this.ysiz * this.oxgen/this.max_oxgen;
     if(this.oxgen >= 0){
-        fill(0,255,255);
+        fill(131,200,175);
         rect(this.x,this.y + this.ysiz - length,this.xsiz,length);
     }
   }
@@ -86,7 +86,7 @@ class Coins{
   }
   draw(){
     for(let i = 0;i < this.coincnt;i++){
-      fill(255,230,0);
+      // fill(255,230,0);
       // circle(this.x ,this.y - (this.d + 3)*i,this.d);
       image(coinimg,this.x,this.y - (this.d + 3)*i,this.d,this.d);
     }
@@ -376,7 +376,7 @@ function drawlands_and_update_status(){
   //マス目の描画ついでにマス目の状態更新
   
   //周りの白色の部分
-  fill(255);
+  fill(231,230,230);
   rect(lands_area.lands_left_top_x,lands_area.lands_left_top_y,lands_area.landsW,lands_area.landsH);
 
   //それぞれの土地の部分
@@ -539,7 +539,7 @@ function tutrial(){
 }
 
 function drawgame(){
-  background(100); //土地の描画と状態の更新
+  background(170,215,240); //土地の描画と状態の更新
   drawlands_and_update_status();
 
   tutrial();
