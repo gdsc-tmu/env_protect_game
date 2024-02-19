@@ -417,6 +417,7 @@ function mouseaction(){
   }
 
   if(isfinish){
+    if(millis() <= endtime + 1500)return ;
     if(!(0 <= mouseX && mouseX < width && 0 <= mouseY && mouseY < height))return ;
     //今は右半分ならリスタート
     //左半分ならニュース
