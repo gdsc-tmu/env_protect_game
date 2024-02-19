@@ -267,9 +267,9 @@ function land_init(){
 
 function restart(){
   //リスタート
-  hp = new HP_gauge(width*50/1250,height/3,width/20,height/2);
-  oxgen = new Oxgen_gauge(width* 130/1250,height/3,width/20,height/2);
-  coins = new Coins(width/6,height/2 + height/3,width/30);
+  hp = new HP_gauge(width*50/1250,height * 30/75,width/20,height/2);
+  oxgen = new Oxgen_gauge(width* 130/1250,height* 30/75,width/20,height/2);
+  coins = new Coins(width*220/1250,height/2 + height * 26/75,width/30);
   land_init();
   isfinish = false;
   starttime = millis();
@@ -524,7 +524,7 @@ function drawresult(){
   let txtrightx =  width /2 - height * 3/10 + cWidth_base;
   let txtleftx = txtrightx - cWidth;
   text(resulttxt,txtleftx,height/2 + height/15);
-  rect(txtleftx, height/2 + height/15 + height/100, cWidth,  height/100);
+  rect(txtleftx, height/2 + height/15 + height/50, cWidth,  height/100);
 }
 
 function tutrial(){
@@ -536,7 +536,7 @@ function tutrial(){
   }
   if(coin_tutrial == true){
     //コインのところに手を置く
-    image(handimg,width/6 + width/30,height/2 + height/3,width/20,width/20);
+    image(handimg,width*220/1250 + width/30,height/2 + height*26/75,width/20,width/20);
   }else if(planting_tutrial == true){
     //畑のところに手を置く
     for(let i = 0;i < ynum;i++){
