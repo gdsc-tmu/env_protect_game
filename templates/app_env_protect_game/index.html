@@ -7,11 +7,17 @@
     {% load static %}
     <script language="javascript" type="text/javascript" src="{% static 'app_env_protect_game/libraries/p5.min.js' %}"></script>
     <script language="javascript" type="text/javascript" src="{% static 'app_env_protect_game/game.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'app_env_protect_game/style_game.css' %}">
     <link rel="icon" type="image/ico" href="{% static 'app_env_protect_game/img/favicon.ico' %}">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6S1K8BV4DG"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6S1K8BV4DG');
+    </script>
 </head>
 <body>
-    <div style="display: block;" id='myContainer'></div>
-    <div style="display: block;">
-    </div>
 </body>
 </html>
