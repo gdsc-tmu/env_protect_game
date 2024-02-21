@@ -235,14 +235,19 @@ let started = false;
 let isfinish = false;
 
 let news_type = "none";
-let starttime,endtime;
+let starttime,endtime,newsclicktime;
 let coin_tutrial = true;//tutrialをやる必要があるか
 let planting_tutrial = true;
 let fire_tutrial = true;
+let waiting_news = false;//news画面を表示させるまでの間出すかどうか
 
 
 function setup(){
-  canvas = createCanvas(float(windowWidth) * 3/4, float(windowWidth) *3/4 * 3/5);
+  if(float(windowHeight) >= float(windowWidth) * 3/5){
+    canvas = createCanvas(float(windowWidth) , float(windowWidth) * 3/5);
+  }else{
+    canvas = createCanvas(float(windowHeight) * 5/3 , float(windowHeight));
+  }
   background(100);
   lands_area = new LandsArea(width,height);
   ynum = lands_area.ynum;
@@ -274,6 +279,7 @@ function restart(){
   isfinish = false;
   starttime = millis();
   coin_tutrial = true;planting_tutrial = true;fire_tutrial = true;
+  waiting_news = false;
 }
 
 
@@ -345,9 +351,6 @@ function drawfield(i,j){
   let landlevel = lands[i][j].level;
   let pos = lands[i][j].position();
   let field_status = return_field_status(i,j);//0,1,2でsml
-  if(i == 1 && j == 2){
-    console.log(lands[i][j].harvestpoint);
-  }
   if(landlevel == 1){
     //plant1
     if(field_status == 0){
@@ -440,12 +443,14 @@ function mouseaction(){
     if(mouseX <= width/2){
       restart();
     }else{
+      waiting_news = true;
+      newsclicktime = millis();
       redirectToresult(news_type);
     }
     
   }else{
     //押されたのが森林か農地だったら
-    console.log(mouseX,mouseY);
+    // console.log(mouseX,mouseY);
     let fin = false;
     for(let i = 0;i < ynum;i++)for(let j = 0;j < xnum;j++){
       let pos = lands[i][j].position();
@@ -525,11 +530,21 @@ function drawresult(){
   let txtleftx = txtrightx - cWidth;
   text(resulttxt,txtleftx,height/2 + height/15);
   rect(txtleftx, height/2 + height/15 + height/50, cWidth,  height/100);
+
+  if(waiting_news){
+    noStroke();
+    fill(255);
+    ellipse(txtrightx - width/10, height/2 + height/5, height/20);
+    fill(170,215,240);
+    arc(txtrightx - width/10, height/2 + height/5, height/20, height/20, -PI/2,-PI/2 + 2 * PI * 19/20 * min(4000,millis()-newsclicktime)/4000);
+    fill(255);
+    ellipse(txtrightx - width/10, height/2 + height/5, height/30);
+  }
 }
 
 function tutrial(){
   let nowtime = millis();
-  console.log(floor(nowtime - starttime) /1000);
+  // console.log(floor(nowtime - starttime) /1000);
   if((floor(nowtime - starttime)) % 1500 >= 1000){
     //点滅させるための処理
     return ;
@@ -564,7 +579,8 @@ function tutrial(){
 }
 
 function drawgame(){
-  background(170,215,240); //土地の描画と状態の更新
+  background(170,215,240); 
+  //土地の描画と状態の更新
   drawlands_and_update_status();
 
   tutrial();
