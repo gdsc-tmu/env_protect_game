@@ -4,7 +4,7 @@ html {
   }
 
   body {
-	background-color:#755A5A;
+	background-color:#767474;
 	font-family: "Share Tech", sans-serif;
   }
 
@@ -15,10 +15,10 @@ html {
   }
 
   .lines-image {
-	width: 10%;
+	width: 18%;
 	position: absolute;
-	top: 35%;
-	left: 44%;
+	top: 50%;
+	left: 40%;
 	display: block;
 	z-index: 1;
   }
@@ -45,14 +45,22 @@ html {
 
 
 /* Place each news without overlapping*/
-#poverty_news #news1{position: absolute; top: 25%; left: 25%;}
-#poverty_news #news2{position: absolute; top: 40%; left: 25%;}
-#poverty_news #news3{position: absolute; top: 55%; left: 25%;}
+#poverty_news #news1{position: absolute; top: 43%; left: 10%;}
+#poverty_news #news2{position: absolute; top: 60%; left: 10%;}
+#poverty_news #news3{position: absolute; top: 77%; left: 10%;}
 
+#env_news #news1{position: absolute; top: 43%; left: 63%;}
+#env_news #news2{position: absolute; top: 60%; left: 63%;}
+#env_news #news3{position: absolute; top: 77%; left: 63%;}
 
-#env_news #news1{position: absolute; top: 25%; left: 55%;}
-#env_news #news2{position: absolute; top: 40%; left: 55%;}
-#env_news #news3{position: absolute; top: 55%; left: 55%;}
+/* Place news number at the top left corner */
+#poverty_news #news1::before{content: " • news1"; position: absolute; left: 0px; font-size: 1.6rem;}
+#poverty_news #news2::before{content: " • news2"; position: absolute; left: 0px; font-size: 1.6rem;}
+#poverty_news #news3::before{content: " • news3"; position: absolute; left: 0px; font-size: 1.6rem;}
+
+#env_news #news1::before{content: " • news1"; position: absolute; left: 0px; font-size: 1.6rem;}
+#env_news #news2::before{content: " • news2"; position: absolute; left: 0px; font-size: 1.6rem;}
+#env_news #news3::before{content: " • news3"; position: absolute; left: 0px; font-size: 1.6rem;}
 
 /* When id exists use these */
 /* #poverty_and_enviroment_news_1{position: absolute; top: 30%; left: 40%;}
@@ -68,18 +76,18 @@ html {
 		font-weight: 400;
 		font-style: normal;
 		position: absolute;
-		top: 0%;
-		left: 40%;
+		top: 7%;
+		left: 42%;
 		font-size: 2.4rem;
-		color: #FFFFFF;
+		color: #3B2727;
 	}
 
 	.news-contents{
-		width: 18%;
-		height: 12%;
+		width: 25%;
+		height: 15%;
 		text-align: center;
-		border-radius: 10px;
-		background: #ECCF87;
+		border-radius: 0px 16px;
+		background: #FFFFFF;
 		position: absolute;
 	
 		/* This is to be modified */
@@ -108,7 +116,7 @@ html {
 		-webkit-line-clamp: 3;
 		-webkit-box-orient: vertical;
 		
-		font-size: 1.4rem;
+		font-size: 1.8rem;
 		text-decoration: none;
 	}
 
@@ -116,7 +124,7 @@ html {
 		color: #D88686;
 		font-size: 14rem;
 		position: absolute;
-		top: 38%;
+		top: 60%;
 		left: 47%;
 		z-index: 2;
 	}
@@ -143,7 +151,7 @@ html {
 		height: 12%;
 		text-align: center;
 		border-radius: 10px;
-		background: #ECCF87;
+		background: #FFFFFF;
 		position: absolute;
 	
 		/* This is to be modified */
@@ -200,7 +208,7 @@ html {
 		height: 12%;
 		text-align: center;
 		border-radius: 10px;
-		background: #ECCF87;
+		background: #FFFFFF;
 		position: absolute;
 	
 		/* This is to be modified */
