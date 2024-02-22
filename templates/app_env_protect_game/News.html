@@ -22,7 +22,7 @@
 <body>
     <div class="container">
         <img class="news-image" src="{% static 'app_env_protect_game/img/NewsPage.png' %}">
-        <img class="lines-image" src="{% static 'app_env_protect_game/img/lines.png' %}">
+        <img class="lines-image" src="{% static 'app_env_protect_game/img/lines_question.png' %}">
         <h1>How difficult was it to balance Green and Greed?<br>
             This is not just a game...<br>
             Here are real-life examples you can learn<br>
@@ -35,7 +35,6 @@
                 </div>
             {% endfor %}
         </div> -->
-        <a class="question-mark">?</a>
         <div id="env_news">
             {% for article in poverty_news.items %}
                 <div class="news-contents" id="{{ article.id }}">
