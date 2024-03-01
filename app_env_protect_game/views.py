@@ -5,6 +5,9 @@ import xmltodict
 from django.http import HttpResponse
 import json
 
+def tutorial(request):
+    return render(request, "app_env_protect_game/tutorial.html")
+
 # Reference: https://qiita.com/KMD/items/872d8f4eed5d6ebf5df1
 def retriveNews(news_words):
     language = 'hl=en&gl=EN&ceid=EN:en'

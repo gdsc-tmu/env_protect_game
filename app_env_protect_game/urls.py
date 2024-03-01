@@ -9,7 +9,8 @@ urlpatterns = [
         path('', views.index, name="index"),
         path('newsFeed/', views.getNewsFeed, name="getNewsFeed"),
         path('result/', views.resultRedirect, name="resultRedirect"),
-        path('newsPage/', views.newsPage, name="newsPage")
+        path('newsPage/', views.newsPage, name="newsPage"),
+        path('tutorial/', views.tutorial, name="tutorial")
 
 ]
 
