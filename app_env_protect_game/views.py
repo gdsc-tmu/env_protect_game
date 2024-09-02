@@ -68,3 +68,6 @@ def newsPage(request):
     return render(request, "app_env_protect_game/News.html", {"poverty_news": poverty_news, "env_news": env_news})
     # poverty_and_enviroment_news = retriveNews("economic poverty and environment problems")
     # return render(request, "app_env_protect_game/News.html", {"poverty_and_enviroment_news": poverty_and_enviroment_news})
+
+def instructionPage(request):
+    return render(request, "app_env_protect_game/Instruction.html")
