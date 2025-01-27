@@ -27,7 +27,8 @@ import os
 if os.getenv('GAE_APPLICATION', None):
 # 本番環境
     DEBUG = False
-    ALLOWED_HOSTS = ['https://erudite-scholar-382607.an.r.appspot.com']
+    ALLOWED_HOSTS = ['https://erudite-scholar-382607.an.r.appspot.com',
+                     'https://yuyuslab.pythonanywhere.com']
 else:
     # 開発環境
     DEBUG = True
