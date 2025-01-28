@@ -27,8 +27,7 @@ import os
 if os.getenv('GAE_APPLICATION', None):
 # 本番環境
     DEBUG = False
-    ALLOWED_HOSTS = ['https://erudite-scholar-382607.an.r.appspot.com',
-                     'https://yuyuslab.pythonanywhere.com']
+    ALLOWED_HOSTS = ['https://erudite-scholar-382607.an.r.appspot.com', 'https://yuyuslab.pythonanywhere.com']
 else:
     # 開発環境
     DEBUG = True
@@ -124,7 +123,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 STATICFILES_DIRS = [ BASE_DIR / "static" ]
 
 # Default primary key field type
